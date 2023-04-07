@@ -1,0 +1,25 @@
+<launch>
+  <arg name="port" default="/dev/ttyACM0" />
+  <arg name="frame_id" default="imu_link" />
+
+
+
+  <node pkg="imu_complementary_filter" type="complementary_filter_node" name="filter" >
+    <param name="fixed_frame" value="rt" />
+    <param name="publish_tf" value="true" />
+  </node>
+
+  <node pkg="imu_complementary_filter" type="complementary_filter_node" name="filter_yvt" >
+    <remap from="/imu/data_raw" to="/hokuyo3d/imu" />
+    <remap from="/imu/data" to="/hokuyo3d/imu_filter" />
+    <param name="fixed_frame" value="yvt" />
+    <param name="publish_tf" value="true" />
+  </node>
+
+  <node pkg="rviz" type="rviz" name="rviz" required="true" output="screen" args="-d /home/hokuyo/catkin_ws/src/rt_usb_9axisimu_driver/launch/config.rviz" />
+  <node pkg="tf" type="static_transform_publisher" name="broadcaster" args="0 0 0 0 0 0 imu_link base_link 100" />
+  <node pkg="tf" type="static_transform_publisher" name="rt_tf" args="0 0 0 0 0 0 imu_link rt 100" />
+  <node pkg="tf" type="static_transform_publisher" name="yvt_tf" args="-0.3 0 0 0 0 1 rt yvt 100" />
+  <node pkg="tf" type="static_transform_publisher" name="gx5_tf" args="0.3 0 0 0 0 1 rt sensor 100" />
+
+</launch>

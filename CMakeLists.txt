@@ -33,9 +33,11 @@ include_directories(
 
 # Declare a C++ executable
 add_executable(rt_usb_9axisimu_driver src/rt_usb_9axisimu_driver_node.cpp src/rt_usb_9axisimu_driver.cpp)
+add_executable(imu_to_livox_node src/imu_to_livox.cpp)
 
 # Specify libraries to link a library or executable target against
 target_link_libraries(rt_usb_9axisimu_driver ${catkin_LIBRARIES})
+target_link_libraries(imu_to_livox_node ${catkin_LIBRARIES})
 
 # Add cmake target dependencies of the library
 # add_dependencies(rt_usb_9axisimu_driver rt_usb_9axisimu_driver_generate_messages_cpp)
@@ -45,7 +47,7 @@ target_link_libraries(rt_usb_9axisimu_driver ${catkin_LIBRARIES})
 #############
 
 # Mark executables and/or libraries for installation
-install(TARGETS rt_usb_9axisimu_driver
+install(TARGETS rt_usb_9axisimu_driver imu_to_livox_node
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

@@ -7,4 +7,7 @@
     <param name="frame_id" value="$(arg frame_id)" />
   </node>
 
+  <node pkg="rt_usb_9axisimu_driver" type="imu_to_livox_node" name="imu_to_livox_node">
+  </node>
+
 </launch>
